@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ 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 }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ 807eb14bc4486da16f2aff6251e69a420aaeece0 }}
